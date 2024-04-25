@@ -23,8 +23,8 @@
                     @Html.DisplayFor(modelItem => item.Length)
                 </td>
                 <td>
-                    @Html.ActionLink("Download", "DownLoad", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Download", "DownLoadBlob", new {  filename =item.Name }) |
+                    @Html.ActionLink("Delete", "DeleteBlob", new { filename = item.Name })
                 </td>
             </tr>
         }

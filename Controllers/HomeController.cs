@@ -8,7 +8,7 @@ namespace BlobStorageDemo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-       private string Connectionstring = "DefaultEndpointsProtocol=https;AccountName=storageaccountnet123;AccountKey=B9C17yRoTls7LXYXPuc9mLfclatk6a1nW3tziX/iRTwmyyQqUzjtCT9pcc/iDjuyBart0SstDmTK+AStJ1qSkA==;EndpointSuffix=core.windows.net";
+       private string Connectionstring = "Test";
         private string containerName = "data";
 
         public HomeController(ILogger<HomeController> logger)
@@ -19,8 +19,20 @@ namespace BlobStorageDemo.Controllers
         public IActionResult Index()
         {
             return View();
+            
         }
-
+        public async Task<IActionResult> DownLoadBlob(string filename)
+        {
+            BlobClient blobClient = new BlobClient(Connectionstring,containerName,filename);
+            await blobClient.DownloadToAsync($"D:\\playground\\blob\\{filename}");
+                return View("Index");
+        }
+        public async Task<IActionResult> DeleteBlob(string filename)
+        {
+            BlobClient blobClient = new BlobClient(Connectionstring, containerName, filename);
+            await blobClient.DeleteAsync();
+            return View("Index");
+        }
         public async Task<IActionResult> BlobList()
         {
             List<BlobItem> blobItems = new List<BlobItem>();
