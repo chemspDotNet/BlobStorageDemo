@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Blob Storage Demo</h1>
+</div>
+
+<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Upload">
+   <h1>Upload File to Blob</h1>
+    <input type="file" name="File" />
+    <p style="color:red"> @ViewBag.ErrorMessage</p>
+    <button type="submit">Upload</button>
+</form>
+
+<hr />
+<h1>List of Blobs</h1>
+ <div id="blobs">
+
+ </div>
+ @section Scripts {
+     @* <script>
+        $('#blobs').load("/Home/BlobList")
+     </script> *@
+
+    <script>
+        $(document).ready(function () {
+               
+                $.ajax({
+                    url: '@Url.Action("BlobList", "Home")',
+                    type: 'GET',
+                    dataType: 'html', // Change the dataType to 'html' to receive HTML content
+                    success: function (data) {
+                        // Replace the content of a div with the received partial view
+                        $("#blobs").html(data);
+                    },
+                    error: function () {
+                        // Handle errors
+                        console.log("Error occurred");
+                    }
+                });
+            
+        });
+    </script>
+ 
+ }
