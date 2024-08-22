@@ -8,7 +8,6 @@ builder.Services.AddAzureClients(clientBuilder =>
     clientBuilder.AddBlobServiceClient(builder.Configuration["myBlobConnection:blob"]!, preferMsi: true);
     clientBuilder.AddQueueServiceClient(builder.Configuration["myBlobConnection:queue"]!, preferMsi: true);
 });
-var x = builder.Configuration["myBlobConnection:blob"]!;
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
