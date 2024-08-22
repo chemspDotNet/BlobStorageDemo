@@ -8,12 +8,13 @@ namespace BlobStorageDemo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-       private string Connectionstring = "Test";
+        private string Connectionstring ;
         private string containerName = "data";
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configurationManager )
         {
             _logger = logger;
+           Connectionstring= configurationManager["myBlobConnection:blob"]; // Local Emulator
         }
 
         public IActionResult Index()
